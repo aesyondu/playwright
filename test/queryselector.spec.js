@@ -484,8 +484,20 @@ module.exports.describe = function({testRunner, expect, selectors, FFOX, CHROMIU
     });
   });
 
-  describe('text selector', () => {
-    it('query', async ({page}) => {
+  fdescribe('text selector', () => {
+    fit('query', async ({page}) => {
+      /** Succeeds */
+      await page.setContent(`<button> MY BUTTON </button>`);
+      expect(await page.$eval(`text=MY BUTTON`, e => e.outerHTML)).toBe('<button> MY BUTTON </button>');
+
+      /** Succeeds: As RegExp case-insensitive */
+      await page.setContent(`<button> MY BUTTON </button>`);
+      expect(await page.$eval(`text=/My Button/i`, e => e.outerHTML)).toBe('<button> MY BUTTON </button>');
+
+      /** Fails */
+      await page.setContent(`<button> MY BUTTON </button>`);
+      expect(await page.$eval(`text=My Button`, e => e.outerHTML)).toBe('<button> MY BUTTON </button>');
+
       await page.setContent(`<div>yo</div><div>ya</div><div>\nye  </div>`);
       expect(await page.$eval(`text=ya`, e => e.outerHTML)).toBe('<div>ya</div>');
       expect(await page.$eval(`text="ya"`, e => e.outerHTML)).toBe('<div>ya</div>');

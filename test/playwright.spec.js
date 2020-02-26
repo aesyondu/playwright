@@ -156,66 +156,66 @@ module.exports.describe = ({testRunner, product, playwrightPath}) => {
 
       // Page-level tests that are given a browser, a context and a page.
       // Each test is launched in a new browser context.
-      testRunner.loadTests(require('./accessibility.spec.js'), testOptions);
-      testRunner.loadTests(require('./click.spec.js'), testOptions);
-      testRunner.loadTests(require('./cookies.spec.js'), testOptions);
-      testRunner.loadTests(require('./dialog.spec.js'), testOptions);
-      testRunner.loadTests(require('./elementhandle.spec.js'), testOptions);
-      testRunner.loadTests(require('./emulation.spec.js'), testOptions);
-      testRunner.loadTests(require('./evaluation.spec.js'), testOptions);
-      testRunner.loadTests(require('./frame.spec.js'), testOptions);
-      testRunner.loadTests(require('./focus.spec.js'), testOptions);
-      testRunner.loadTests(require('./input.spec.js'), testOptions);
-      testRunner.loadTests(require('./jshandle.spec.js'), testOptions);
-      testRunner.loadTests(require('./keyboard.spec.js'), testOptions);
-      testRunner.loadTests(require('./mouse.spec.js'), testOptions);
-      testRunner.loadTests(require('./navigation.spec.js'), testOptions);
-      testRunner.loadTests(require('./network.spec.js'), testOptions);
-      testRunner.loadTests(require('./page.spec.js'), testOptions);
+      // testRunner.loadTests(require('./accessibility.spec.js'), testOptions);
+      // testRunner.loadTests(require('./click.spec.js'), testOptions);
+      // testRunner.loadTests(require('./cookies.spec.js'), testOptions);
+      // testRunner.loadTests(require('./dialog.spec.js'), testOptions);
+      // testRunner.loadTests(require('./elementhandle.spec.js'), testOptions);
+      // testRunner.loadTests(require('./emulation.spec.js'), testOptions);
+      // testRunner.loadTests(require('./evaluation.spec.js'), testOptions);
+      // testRunner.loadTests(require('./frame.spec.js'), testOptions);
+      // testRunner.loadTests(require('./focus.spec.js'), testOptions);
+      // testRunner.loadTests(require('./input.spec.js'), testOptions);
+      // testRunner.loadTests(require('./jshandle.spec.js'), testOptions);
+      // testRunner.loadTests(require('./keyboard.spec.js'), testOptions);
+      // testRunner.loadTests(require('./mouse.spec.js'), testOptions);
+      // testRunner.loadTests(require('./navigation.spec.js'), testOptions);
+      // testRunner.loadTests(require('./network.spec.js'), testOptions);
+      // testRunner.loadTests(require('./page.spec.js'), testOptions);
       testRunner.loadTests(require('./queryselector.spec.js'), testOptions);
-      testRunner.loadTests(require('./screenshot.spec.js'), testOptions);
-      testRunner.loadTests(require('./waittask.spec.js'), testOptions);
-      testRunner.loadTests(require('./interception.spec.js'), testOptions);
-      testRunner.loadTests(require('./geolocation.spec.js'), testOptions);
-      testRunner.loadTests(require('./workers.spec.js'), testOptions);
-      testRunner.loadTests(require('./capabilities.spec.js'), testOptions);
+      // testRunner.loadTests(require('./screenshot.spec.js'), testOptions);
+      // testRunner.loadTests(require('./waittask.spec.js'), testOptions);
+      // testRunner.loadTests(require('./interception.spec.js'), testOptions);
+      // testRunner.loadTests(require('./geolocation.spec.js'), testOptions);
+      // testRunner.loadTests(require('./workers.spec.js'), testOptions);
+      // testRunner.loadTests(require('./capabilities.spec.js'), testOptions);
 
-      if (CHROMIUM) {
-        testRunner.loadTests(require('./chromium/chromium.spec.js'), testOptions);
-        testRunner.loadTests(require('./chromium/coverage.spec.js'), testOptions);
-        testRunner.loadTests(require('./chromium/pdf.spec.js'), testOptions);
-        testRunner.loadTests(require('./chromium/session.spec.js'), testOptions);
-      }
+      // if (CHROMIUM) {
+      //   testRunner.loadTests(require('./chromium/chromium.spec.js'), testOptions);
+      //   testRunner.loadTests(require('./chromium/coverage.spec.js'), testOptions);
+      //   testRunner.loadTests(require('./chromium/pdf.spec.js'), testOptions);
+      //   testRunner.loadTests(require('./chromium/session.spec.js'), testOptions);
+      // }
 
-      if (CHROMIUM || FFOX) {
-        testRunner.loadTests(require('./features/permissions.spec.js'), testOptions);
-      }
+      // if (CHROMIUM || FFOX) {
+      //   testRunner.loadTests(require('./features/permissions.spec.js'), testOptions);
+      // }
 
-      if (WEBKIT) {
-        testRunner.loadTests(require('./webkit/provisional.spec.js'), testOptions);
-      }
+      // if (WEBKIT) {
+      //   testRunner.loadTests(require('./webkit/provisional.spec.js'), testOptions);
+      // }
     });
 
-    // Browser-level tests that are given a browser.
-    testRunner.loadTests(require('./browser.spec.js'), testOptions);
-    testRunner.loadTests(require('./browsercontext.spec.js'), testOptions);
-    testRunner.loadTests(require('./ignorehttpserrors.spec.js'), testOptions);
-    testRunner.loadTests(require('./popup.spec.js'), testOptions);
+    // // Browser-level tests that are given a browser.
+    // testRunner.loadTests(require('./browser.spec.js'), testOptions);
+    // testRunner.loadTests(require('./browsercontext.spec.js'), testOptions);
+    // testRunner.loadTests(require('./ignorehttpserrors.spec.js'), testOptions);
+    // testRunner.loadTests(require('./popup.spec.js'), testOptions);
   });
 
   // Top-level tests that launch Browser themselves.
-  testRunner.loadTests(require('./defaultbrowsercontext.spec.js'), testOptions);
-  testRunner.loadTests(require('./fixtures.spec.js'), testOptions);
-  testRunner.loadTests(require('./launcher.spec.js'), testOptions);
-  testRunner.loadTests(require('./headful.spec.js'), testOptions);
-  testRunner.loadTests(require('./multiclient.spec.js'), testOptions);
+  // testRunner.loadTests(require('./defaultbrowsercontext.spec.js'), testOptions);
+  // testRunner.loadTests(require('./fixtures.spec.js'), testOptions);
+  // testRunner.loadTests(require('./launcher.spec.js'), testOptions);
+  // testRunner.loadTests(require('./headful.spec.js'), testOptions);
+  // testRunner.loadTests(require('./multiclient.spec.js'), testOptions);
 
-  if (CHROMIUM) {
-    testRunner.loadTests(require('./chromium/launcher.spec.js'), testOptions);
-    testRunner.loadTests(require('./chromium/headful.spec.js'), testOptions);
-    testRunner.loadTests(require('./chromium/oopif.spec.js'), testOptions);
-    testRunner.loadTests(require('./chromium/tracing.spec.js'), testOptions);
-  }
+  // if (CHROMIUM) {
+  //   testRunner.loadTests(require('./chromium/launcher.spec.js'), testOptions);
+  //   testRunner.loadTests(require('./chromium/headful.spec.js'), testOptions);
+  //   testRunner.loadTests(require('./chromium/oopif.spec.js'), testOptions);
+  //   testRunner.loadTests(require('./chromium/tracing.spec.js'), testOptions);
+  // }
 
-  testRunner.loadTests(require('./web.spec.js'), testOptions);
+  // testRunner.loadTests(require('./web.spec.js'), testOptions);
 };
