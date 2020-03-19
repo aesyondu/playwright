@@ -511,6 +511,10 @@ module.exports.describe = function({testRunner, expect, playwright, FFOX, CHROMI
 
       await page.setContent(`<div>yo<span id="s1"></span></div><div>yo<span id="s2"></span><span id="s3"></span></div>`);
       expect(await page.$$eval(`text=yo`, es => es.map(e => e.outerHTML).join('\n'))).toBe('<div>yo<span id="s1"></span></div>\n<div>yo<span id="s2"></span><span id="s3"></span></div>');
+
+      await page.setContent(`<div><button>mybutton</button><input type="submit" value="myinput"></div>`);
+      expect(await page.$eval(`text=mybutton`, e => e.outerHTML)).toBe('<button>mybutton</button>');
+      expect(await page.$eval(`text=myinput`, e => e.outerHTML)).toBe('<input type="submit" value="myinput">');
     });
 
     it('create', async ({page}) => {
