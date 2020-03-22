@@ -310,6 +310,50 @@ module.exports.describe = function({testRunner, expect, FFOX, CHROMIUM, WEBKIT, 
       })
       await page.keyboard.press('a');
       expect(await page.evaluate('lastKey.key')).toBe('a');
-    })
+    });
+    // please run `npm run funit`
+    // issue #1) zAfter.png output of firefox does not show the typed values, but test still passes
+    // issue #2) firefox slow perf
+    // getting 4.5 seconds on chromium
+    // getting 3 seconds on webkit
+    // getting 15 seconds on firefox
+    fit('should work consistently', async({page, server}) => {
+      await page.evaluate(() => {
+        const inputElements = Array.from({ length: 50 }, (v, k) => {
+          return { id: 'a' + k, element: 'input', type: 'text' };
+        });
+
+        inputElements.forEach((e) => {
+          const element = document.createElement(e.element);
+          element.setAttribute('id', e.id);
+          element.setAttribute('type', e.type);
+          document.body.appendChild(element);
+        });
+      });
+
+      await page.screenshot({
+        fullPage: true,
+        path: "zBefore.png"
+      })
+      
+      const elements = await page.$$("input")
+      for (let i = 0; i < elements.length; ++i) {
+        // manual way?
+        // await elements[i].focus()
+        // await elements[i].type("abc123abc123");
+        
+        // auto way?
+        await page.type("#a" + i, "abc123abc123")
+      }
+      await page.screenshot({
+        fullPage: true,
+        path: "zAfter.png"
+      })
+
+      const values = await page.$$eval("input", (nodes) => nodes.map(n => n.value))
+      values.forEach((value, index) => {
+        expect(value).toBe("abc123abc123")
+      })
+    });
   });
 };

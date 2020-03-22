@@ -157,30 +157,30 @@ module.exports.describe = ({testRunner, product, playwrightPath}) => {
       // Page-level tests that are given a browser, a context and a page.
       // Each test is launched in a new browser context.
       describe('[Accessibility]', () => testRunner.loadTests(require('./accessibility.spec.js'), testOptions));
-      describe('[Driver]', () => {
-        testRunner.loadTests(require('./autowaiting.spec.js'), testOptions);
-        testRunner.loadTests(require('./click.spec.js'), testOptions);
-        testRunner.loadTests(require('./cookies.spec.js'), testOptions);
-        testRunner.loadTests(require('./dialog.spec.js'), testOptions);
-        testRunner.loadTests(require('./elementhandle.spec.js'), testOptions);
-        testRunner.loadTests(require('./emulation.spec.js'), testOptions);
-        testRunner.loadTests(require('./evaluation.spec.js'), testOptions);
-        testRunner.loadTests(require('./frame.spec.js'), testOptions);
-        testRunner.loadTests(require('./focus.spec.js'), testOptions);
-        testRunner.loadTests(require('./input.spec.js'), testOptions);
-        testRunner.loadTests(require('./jshandle.spec.js'), testOptions);
+      fdescribe('[Driver]', () => {
+        // testRunner.loadTests(require('./autowaiting.spec.js'), testOptions);
+        // testRunner.loadTests(require('./click.spec.js'), testOptions);
+        // testRunner.loadTests(require('./cookies.spec.js'), testOptions);
+        // testRunner.loadTests(require('./dialog.spec.js'), testOptions);
+        // testRunner.loadTests(require('./elementhandle.spec.js'), testOptions);
+        // testRunner.loadTests(require('./emulation.spec.js'), testOptions);
+        // testRunner.loadTests(require('./evaluation.spec.js'), testOptions);
+        // testRunner.loadTests(require('./frame.spec.js'), testOptions);
+        // testRunner.loadTests(require('./focus.spec.js'), testOptions);
+        // testRunner.loadTests(require('./input.spec.js'), testOptions);
+        // testRunner.loadTests(require('./jshandle.spec.js'), testOptions);
         testRunner.loadTests(require('./keyboard.spec.js'), testOptions);
-        testRunner.loadTests(require('./mouse.spec.js'), testOptions);
-        testRunner.loadTests(require('./navigation.spec.js'), testOptions);
-        testRunner.loadTests(require('./network.spec.js'), testOptions);
-        testRunner.loadTests(require('./page.spec.js'), testOptions);
-        testRunner.loadTests(require('./queryselector.spec.js'), testOptions);
-        testRunner.loadTests(require('./screenshot.spec.js'), testOptions);
-        testRunner.loadTests(require('./waittask.spec.js'), testOptions);
-        testRunner.loadTests(require('./interception.spec.js'), testOptions);
-        testRunner.loadTests(require('./geolocation.spec.js'), testOptions);
-        testRunner.loadTests(require('./workers.spec.js'), testOptions);
-        testRunner.loadTests(require('./capabilities.spec.js'), testOptions);
+        // testRunner.loadTests(require('./mouse.spec.js'), testOptions);
+        // testRunner.loadTests(require('./navigation.spec.js'), testOptions);
+        // testRunner.loadTests(require('./network.spec.js'), testOptions);
+        // testRunner.loadTests(require('./page.spec.js'), testOptions);
+        // testRunner.loadTests(require('./queryselector.spec.js'), testOptions);
+        // testRunner.loadTests(require('./screenshot.spec.js'), testOptions);
+        // testRunner.loadTests(require('./waittask.spec.js'), testOptions);
+        // testRunner.loadTests(require('./interception.spec.js'), testOptions);
+        // testRunner.loadTests(require('./geolocation.spec.js'), testOptions);
+        // testRunner.loadTests(require('./workers.spec.js'), testOptions);
+        // testRunner.loadTests(require('./capabilities.spec.js'), testOptions);
       });
       describe('[Permissions]', () => {
         testRunner.loadTests(require('./permissions.spec.js'), testOptions);
