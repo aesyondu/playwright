@@ -114,6 +114,16 @@ module.exports.describe = function({testRunner, expect, MAC, WIN, FFOX, CHROMIUM
       const response = await page.goto(server.EMPTY_PAGE);
       expect(response.request().postData()).toBe(null);
     });
+    it('should be json string when used via FormData', async({page, server}) => {
+      await page.goto(server.EMPTY_PAGE);
+      server.setRoute('/post', (req, res) => res.end());
+      let request = null;
+      page.on('request', r => request = r);
+      await page.setContent(`<form method='POST' action='/post'><input type='text' name='foo' value='bar'><input type='number' name='baz' value='123'><input type='submit'></form>`);
+      await page.click('input[type=submit]');
+      expect(request).toBeTruthy();
+      expect(request.postData()).toBe('{"foo":"bar","baz":"123"}');
+    });
   });
 
   describe('Response.text', function() {

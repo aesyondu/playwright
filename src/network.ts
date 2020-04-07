@@ -92,6 +92,41 @@ function stripFragmentFromUrl(url: string): string {
   return parsed.href;
 }
 
+function parseFormData(postData: string | null): string | null {
+  if (! postData) {
+    return postData
+  }
+
+  try {
+    JSON.parse(postData)
+    return postData
+  } catch(e) {
+    interface ObjectType {
+      [key: string]: any // string | string[]; Why is this not working?
+    }
+
+    const formObj: ObjectType = {}
+    let formData = postData
+      .split("&")
+      .map((kvString) => kvString.split("="))
+      .reduce((formObj: ObjectType, kvPair: string[]) => {
+        const [ key, value ] = kvPair
+        if (key in formObj) {
+          if (Array.isArray(formObj[key])) {
+            formObj[key].push(value)
+          } else {
+            formObj[key] = [formObj[key], value]
+          }
+        } else {
+          formObj[key] = value
+        }
+        return formObj
+      }, formObj)
+
+    return JSON.stringify(formData)
+  }
+}
+
 export type Headers = { [key: string]: string };
 
 export class Request {
@@ -123,7 +158,7 @@ export class Request {
     this._url = stripFragmentFromUrl(url);
     this._resourceType = resourceType;
     this._method = method;
-    this._postData = postData;
+    this._postData = parseFormData(postData);
     this._headers = headers;
     this._waitForResponsePromise = new Promise(f => this._waitForResponsePromiseCallback = f);
     this._isFavicon = url.endsWith('/favicon.ico');
