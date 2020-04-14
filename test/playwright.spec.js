@@ -164,37 +164,37 @@ module.exports.addPlaywrightTests = ({testRunner, products}) => {
       describe('', function() {
         testRunner.collector().useEnvironment(browserEnvironment);
 
-        describe('', function() {
+        fdescribe('', function() {
           testRunner.collector().useEnvironment(pageEnvironment);
 
           // Page-level tests that are given a browser, a context and a page.
           // Each test is launched in a new browser context.
-          loadTest('./accessibility.spec.js');
-          loadTest('./autowaiting.spec.js');
-          loadTest('./click.spec.js');
-          loadTest('./cookies.spec.js');
-          loadTest('./dialog.spec.js');
-          loadTest('./download.spec.js');
-          loadTest('./elementhandle.spec.js');
-          loadTest('./emulation.spec.js');
-          loadTest('./evaluation.spec.js');
-          loadTest('./frame.spec.js');
-          loadTest('./focus.spec.js');
-          loadTest('./input.spec.js');
-          loadTest('./jshandle.spec.js');
+          // loadTest('./accessibility.spec.js');
+          // loadTest('./autowaiting.spec.js');
+          // loadTest('./click.spec.js');
+          // loadTest('./cookies.spec.js');
+          // loadTest('./dialog.spec.js');
+          // loadTest('./download.spec.js');
+          // loadTest('./elementhandle.spec.js');
+          // loadTest('./emulation.spec.js');
+          // loadTest('./evaluation.spec.js');
+          // loadTest('./frame.spec.js');
+          // loadTest('./focus.spec.js');
+          // loadTest('./input.spec.js');
+          // loadTest('./jshandle.spec.js');
           loadTest('./keyboard.spec.js');
-          loadTest('./mouse.spec.js');
-          loadTest('./navigation.spec.js');
-          loadTest('./network.spec.js');
-          loadTest('./page.spec.js');
-          loadTest('./queryselector.spec.js');
-          loadTest('./screenshot.spec.js');
-          loadTest('./waittask.spec.js');
-          loadTest('./interception.spec.js');
-          loadTest('./geolocation.spec.js');
-          loadTest('./workers.spec.js');
-          loadTest('./capabilities.spec.js');
-          loadTest('./permissions.spec.js');
+          // loadTest('./mouse.spec.js');
+          // loadTest('./navigation.spec.js');
+          // loadTest('./network.spec.js');
+          // loadTest('./page.spec.js');
+          // loadTest('./queryselector.spec.js');
+          // loadTest('./screenshot.spec.js');
+          // loadTest('./waittask.spec.js');
+          // loadTest('./interception.spec.js');
+          // loadTest('./geolocation.spec.js');
+          // loadTest('./workers.spec.js');
+          // loadTest('./capabilities.spec.js');
+          // loadTest('./permissions.spec.js');
 
           describe.skip(product !== 'Chromium')('[Chromium]', () => {
             loadTest('./chromium/chromium.spec.js');

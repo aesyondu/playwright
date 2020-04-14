@@ -16,7 +16,12 @@
  */
 
 const utils = require('./utils');
-const {FFOX, CHROMIUM, WEBKIT, MAC} = require('./utils').testOptions(browserType);
+const { makeUserDataDir, removeUserDataDir } = utils;
+const {FFOX, CHROMIUM, WEBKIT, MAC, defaultBrowserOptions} = require('./utils').testOptions(browserType);
+
+const headfulOptions = Object.assign({}, defaultBrowserOptions, {
+  headless: false
+});
 
 describe('Keyboard', function() {
   it('should type into a textarea', async({page, server}) => {
@@ -303,4 +308,110 @@ describe('Keyboard', function() {
     await page.keyboard.press('a');
     expect(await page.evaluate('lastKey.key')).toBe('a');
   })
+    // please run `npm run funit`
+    // zAfter.png output of firefox does not show the typed values, but test still passes
+    fit('should work consistently', async({page, server}) => {
+      /**
+       * GIVEN a bunch of inputs
+       */
+      await page.evaluate(() => {
+        const inputElements = Array.from({ length: 50 }, (v, k) => {
+          return { id: 'a' + k, element: 'input', type: 'text' };
+        });
+
+        inputElements.forEach((e) => {
+          const element = document.createElement(e.element);
+          element.setAttribute('id', e.id);
+          element.setAttribute('type', e.type);
+          document.body.appendChild(element);
+        });
+      });
+
+      await page.screenshot({
+        fullPage: true,
+        path: "zBefore.png"
+      })
+      
+      /**
+       * WHEN some random things are typed into input
+       */
+      const elements = await page.$$("input")
+      for (let i = 0; i < elements.length; ++i) {
+        // NOTE: Either type or fill doesn't work
+        // await page.type("#a" + i, "abc123abc123")
+        await page.fill("#a" + i, "abc123abc123")
+      }
+
+      /**
+       * THEN it should appear in the screenshot
+       */
+      await page.screenshot({
+        fullPage: true,
+        path: "zAfter.png"
+      })
+
+      /**
+       * THEN the value of inputs should be the typed string
+       */
+      const values = await page.$$eval("input", (nodes) => nodes.map(n => n.value))
+      values.forEach((value, index) => {
+        expect(value).toBe("abc123abc123")
+      })
+    });
+    // As seen in headful mode, the input cannot be seen
+    fit('should work consistently', async({browserType}) => {
+      const userDataDir = await makeUserDataDir();
+      const headfulContext = await browserType.launchPersistentContext(userDataDir, headfulOptions);
+      const headfulPage = await headfulContext.newPage();
+
+      /**
+       * GIVEN a bunch of inputs
+       */
+      await headfulPage.evaluate(() => {
+        const inputElements = Array.from({ length: 10 }, (v, k) => {
+          return { id: 'a' + k, element: 'input', type: 'text' };
+        });
+
+        inputElements.forEach((e) => {
+          const element = document.createElement(e.element);
+          element.setAttribute('id', e.id);
+          element.setAttribute('type', e.type);
+          document.body.appendChild(element);
+        });
+      });
+
+      await headfulPage.screenshot({
+        fullPage: true,
+        path: "headfullzBefore.png"
+      })
+      
+      /**
+       * WHEN some random things are typed into inputs
+       */
+      const elements = await headfulPage.$$("input")
+      for (let i = 0; i < elements.length; ++i) {
+        // NOTE: Either type or fill doesn't work
+        // await headfulPage.type("#a" + i, "abc123abc123")
+        await headfulPage.fill("#a" + i, "abc123abc123")
+      }
+
+      /**
+       * THEN it should appear in the screenshot, and also in headful mode
+       */
+      await headfulPage.screenshot({
+        fullPage: true,
+        path: "headfullzAfter.png"
+      })
+
+      /**
+       * THEN the value of inputs should be the typed string
+       */
+      const values = await headfulPage.$$eval("input", (nodes) => nodes.map(n => n.value))
+      values.forEach((value, index) => {
+        expect(value).toBe("abc123abc123")
+      })
+
+      await headlessContext.close();
+      await removeUserDataDir(userDataDir);
+    });
 });
